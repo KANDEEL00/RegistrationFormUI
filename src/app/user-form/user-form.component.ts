@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { User } from '../../shared/models/user';
 import { AddressFormComponent } from '../address-form/address-form.component';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'user-form',
@@ -13,9 +14,13 @@ import { AddressFormComponent } from '../address-form/address-form.component';
 export class UserFormComponent {
   user: User = new User();
 
+  constructor(public userService: UserService) {}
+
   registerUser() {
     console.log('User Registered');
-    console.log(this.user);
+    this.userService.addUser(this.user).subscribe((response) => {
+      console.log(response);
+    });
     this.user = new User();
   }
 }
