@@ -59,8 +59,25 @@
     />
   </div>
 
+  <div class="row-sm-6">
+    Address
+    <address-form (addAddress)="user.addresses.push($event)"></address-form>
+  </div>
+
   <div class="col-auto">
-    <button type="submit" class="btn btn-primary" (click)="registerUser()">
+    <button
+      type="submit"
+      class="btn btn-primary"
+      (click)="registerUser()"
+      [disabled]="
+        !user.firstName ||
+        !user.lastName ||
+        !user.birthDate ||
+        !user.mobileNumber ||
+        !user.email ||
+        !user.addresses.length
+      "
+    >
       Register
     </button>
   </div>
