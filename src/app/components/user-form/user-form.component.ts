@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { User } from '../../shared/models/user';
+import { User } from '../../../shared/models/user';
 import { AddressFormComponent } from '../address-form/address-form.component';
-import { UserService } from '../services/user.service';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'user-form',
@@ -19,7 +19,7 @@ export class UserFormComponent {
   registerUser() {
     console.log('User Registered');
     this.userService.addUser(this.user).subscribe((response) => {
-      console.log(response);
+      console.log('User ID: ' + response);
     });
     this.user = new User();
   }

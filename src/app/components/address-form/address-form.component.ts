@@ -1,10 +1,10 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
-import { Address } from '../../shared/models/address';
+import { Address } from '../../../shared/models/address';
 import { FormsModule } from '@angular/forms';
-import { Governate } from '../../shared/models/governate';
-import { City } from '../../shared/models/city';
-import { GovernateService } from '../services/governate.service';
-import { CityService } from '../services/city.service';
+import { Governate } from '../../../shared/models/governate';
+import { City } from '../../../shared/models/city';
+import { GovernateService } from '../../services/governate.service';
+import { CityService } from '../../services/city.service';
 
 @Component({
   selector: 'address-form',
