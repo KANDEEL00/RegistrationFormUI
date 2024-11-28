@@ -1,0 +1,67 @@
+<form class="row mt-3 gx-3 gy-2 align-items-center justify-content-center">
+  <div class="row-sm-6">
+    <label class="label" for="fname">First Name</label>
+    <input
+      type="text"
+      name="fname"
+      class="form-control"
+      [(ngModel)]="user.firstName"
+    />
+  </div>
+
+  <div class="row-sm-6">
+    <label class="label" for="mname">Middle Name</label>
+    <input
+      type="text"
+      name="mname"
+      class="form-control"
+      [(ngModel)]="user.middleName"
+    />
+  </div>
+
+  <div class="row-sm-6">
+    <label class="label" for="lname">Last Name</label>
+    <input
+      type="text"
+      name="lname"
+      class="form-control"
+      [(ngModel)]="user.lastName"
+    />
+  </div>
+
+  <div class="row-sm-6">
+    <label class="label" for="dob">Date of Birth</label>
+    <input
+      type="date"
+      name="dob"
+      class="form-control"
+      [(ngModel)]="user.birthDate"
+    />
+  </div>
+
+  <div class="row-sm-6">
+    <label class="label" for="mobile">Mobile Number</label>
+    <input
+      type="tel"
+      name="mobile"
+      class="form-control"
+      [(ngModel)]="user.mobileNumber"
+    />
+  </div>
+
+  <div class="row-sm-6">
+    <label class="label" for="email">Email</label>
+    <input
+      type="email"
+      name="email"
+      class="form-control"
+      [(ngModel)]="user.email"
+    />
+  </div>
+
+  <div class="col-auto">
+    <button type="submit" class="btn btn-primary" (click)="registerUser()">
+      Register
+    </button>
+  </div>
+</form>
