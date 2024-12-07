@@ -1,71 +1,51 @@
-<div class="row-sm-6">
-  <label class="label" for="street">Street</label>
-  <input
-    type="text"
-    name="street"
-    class="form-control"
-    [(ngModel)]="address.street"
-  />
-</div>
+<form class="container row gy-2" [formGroup]="addressForm">
+  <div>
+    <label class="label" for="governate">Governate</label>
+    <select class="form-select" formControlName="governateID">
+      @for(governate of governates; track governate){
+      <option value="{{ governate.governateID }}">
+        {{ governate.governateName }}
+      </option>
+      }
+    </select>
+  </div>
 
-<div class="row-sm-6">
-  <label class="label" for="buildingNo">Building Number</label>
-  <input
-    type="text"
-    name="buildingNo"
-    class="form-control"
-    [(ngModel)]="address.buildingNumber"
-  />
-</div>
+  <div>
+    <label class="label" for="city">City</label>
+    <select class="form-select" formControlName="cityID">
+      @for(city of cities; track city){
+      <option value="{{ city.cityID }}">{{ city.cityName }}</option>
+      }
+    </select>
+  </div>
 
-<div class="row-sm-6">
-  <label class="label" for="flatNo">Flat Number</label>
-  <input
-    type="number"
-    name="flatNo"
-    class="form-control"
-    [(ngModel)]="address.flatNumber"
-  />
-</div>
+  <div>
+    <label class="label">Street</label>
+    <input type="text" class="form-control" formControlName="street" />
+  </div>
 
-<div class="row-sm-6">
-  <label class="label" for="governate">Governate</label>
-  <select
-    class="form-select"
-    [(ngModel)]="address.governateID"
-    (ngModelChange)="onGovernateChange($event)"
-  >
-    @for(governate of governates; track governate){
-    <option value="{{ governate.governateID }}">
-      {{ governate.governateName }}
-    </option>
-    }
-  </select>
-</div>
+  <div>
+    <label class="label" for="buildingNo">Building Number</label>
+    <input
+      type="text"
+      name="buildingNo"
+      class="form-control"
+      formControlName="buildingNumber"
+    />
+  </div>
 
-<div class="row-sm-6">
-  <label class="label" for="city">City</label>
-  <select
-    class="form-select"
-    [(ngModel)]="address.cityID"
-    (ngModelChange)="onCityChange($event)"
-  >
-    @for(city of cities; track city){
-    <option value="{{ city.cityID }}">{{ city.cityName }}</option>
-    }
-  </select>
-
-  <button
-    class="mt-3 btn btn-secondary"
-    (click)="onAddAddress()"
-    [disabled]="
-      !address.street ||
-      !address.buildingNumber ||
-      !address.flatNumber ||
-      !address.governateID ||
-      !address.cityID
-    "
-  >
-    Add Address
-  </button>
-</div>
+  <div>
+    <label class="label" for="flatNo">Flat Number</label>
+    <input
+      type="number"
+      name="flatNo"
+      class="form-control"
+      formControlName="flatNumber"
+    />
+  </div>
+  <div class="col-auto">
+    <button class="mt-3 btn btn-secondary" (click)="onAddAddress()">
+      Add Address
+    </button>
+  </div>
+</form>

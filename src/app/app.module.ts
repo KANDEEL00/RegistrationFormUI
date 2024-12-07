@@ -8,11 +8,11 @@ import { routes } from './app.routes';
 import { provideHttpClient } from '@angular/common/http';
 import { UserFormComponent } from './components/user-form/user-form.component';
 import { AddressFormComponent } from './components/address-form/address-form.component';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [AppComponent, UserFormComponent, AddressFormComponent],
-  imports: [BrowserModule, FormsModule],
+  imports: [BrowserModule, ReactiveFormsModule],
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),

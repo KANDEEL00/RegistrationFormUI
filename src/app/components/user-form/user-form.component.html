@@ -1,85 +1,45 @@
-<form class="row mt-3 gx-3 gy-2 align-items-center justify-content-center">
+<form
+  class="row mt-3 gy-2 justify-content-center"
+  [formGroup]="userForm"
+  (ngSubmit)="$event.preventDefault(); registerUser()"
+>
   <h3>User Info</h3>
-  <div class="row-sm-6">
-    <label class="label" for="fname">First Name</label>
-    <input
-      type="text"
-      name="fname"
-      class="form-control"
-      [(ngModel)]="user.firstName"
-    />
+  <div>
+    <label class="label">First Name</label>
+    <input type="text" class="form-control" formControlName="firstName" />
   </div>
 
-  <div class="row-sm-6">
-    <label class="label" for="mname">Middle Name</label>
-    <input
-      type="text"
-      name="mname"
-      class="form-control"
-      [(ngModel)]="user.middleName"
-    />
+  <div>
+    <label class="label">Middle Name</label>
+    <input type="text" class="form-control" formControlName="middleName" />
   </div>
 
-  <div class="row-sm-6">
-    <label class="label" for="lname">Last Name</label>
-    <input
-      type="text"
-      name="lname"
-      class="form-control"
-      [(ngModel)]="user.lastName"
-    />
+  <div>
+    <label class="label">Last Name</label>
+    <input type="text" class="form-control" formControlName="lastName" />
   </div>
 
-  <div class="row-sm-6">
-    <label class="label" for="dob">Date of Birth</label>
-    <input
-      type="date"
-      name="dob"
-      class="form-control"
-      [(ngModel)]="user.birthDate"
-    />
+  <div>
+    <label class="label">Date of Birth</label>
+    <input type="date" class="form-control" formControlName="birthDate" />
   </div>
 
-  <div class="row-sm-6">
-    <label class="label" for="mobile">Mobile Number</label>
-    <input
-      type="tel"
-      name="mobile"
-      class="form-control"
-      [(ngModel)]="user.mobileNumber"
-    />
+  <div>
+    <label class="label">Mobile Number</label>
+    <input type="tel" class="form-control" formControlName="mobileNumber" />
   </div>
 
-  <div class="row-sm-6">
-    <label class="label" for="email">Email</label>
-    <input
-      type="email"
-      name="email"
-      class="form-control"
-      [(ngModel)]="user.email"
-    />
+  <div>
+    <label class="label">Email</label>
+    <input type="email" class="form-control" formControlName="email" />
   </div>
 
-  <div class="row-sm-6">
+  <div class="mt-4">
     <h3>Address</h3>
-    <address-form (addAddress)="user.addresses.push($event)"></address-form>
+    <address-form (addAddress)="addresses.push($event)"></address-form>
   </div>
 
   <div class="col-auto">
-    <button
-      type="submit"
-      class="btn btn-primary"
-      (click)="registerUser()"
-      [disabled]="
-        !user.firstName ||
-        !user.lastName ||
-        !user.birthDate ||
-        !user.mobileNumber ||
-        !user.email ||
-        !user.addresses.length
-      "
-    >
-      Register
-    </button>
+    <button type="submit" class="btn btn-primary mt-3">Register</button>
   </div>
 </form>
