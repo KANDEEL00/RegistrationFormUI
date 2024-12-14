@@ -3,13 +3,14 @@ import { User } from '../../../shared/models/user';
 import { UserService } from '../../services/user.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Address } from '../../../shared/models/address';
+import { CanComponentDeactivate } from '../../guards/prevent-unsaved-changes.guard';
 
 @Component({
   selector: 'user-form',
   templateUrl: './user-form.component.html',
   styleUrl: './user-form.component.css',
 })
-export class UserFormComponent {
+export class UserFormComponent implements CanComponentDeactivate {
   userForm = new FormGroup({
     firstName: new FormControl('', [
       Validators.required,
@@ -31,6 +32,15 @@ export class UserFormComponent {
   addresses: Address[] = [];
 
   constructor(public userService: UserService) {}
+
+  canDeactivate(): boolean {
+    if (this.userForm.dirty) {
+      return confirm(
+        'You have unsaved changes. Are you sure you want to leave?'
+      );
+    }
+    return true;
+  }
 
   registerUser() {
     console.log(this.userForm.value);
