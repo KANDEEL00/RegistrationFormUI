@@ -37,7 +37,10 @@
 
   <div class="mt-4">
     <h3>Address</h3>
-    <address-form (addAddress)="addresses.push($event)"></address-form>
+    <address-form
+      (addAddress)="addresses.push($event)"
+      (onDirty)="addressFormDirty($event)"
+    ></address-form>
   </div>
 
   <div class="col-auto">

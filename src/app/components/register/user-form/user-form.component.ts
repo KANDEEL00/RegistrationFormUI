@@ -1,16 +1,16 @@
-import { Component } from '@angular/core';
-import { User } from '../../../shared/models/user';
-import { UserService } from '../../services/user.service';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Address } from '../../../shared/models/address';
-import { CanComponentDeactivate } from '../../guards/prevent-unsaved-changes.guard';
+import { Address } from '../../../../shared/models/address';
+import { User } from '../../../../shared/models/user';
+import { UserService } from '../../../services/user.service';
 
 @Component({
   selector: 'user-form',
   templateUrl: './user-form.component.html',
   styleUrl: './user-form.component.css',
 })
-export class UserFormComponent implements CanComponentDeactivate {
+export class UserFormComponent {
+  @Output() onDirty = new EventEmitter<boolean>();
   userForm = new FormGroup({
     firstName: new FormControl('', [
       Validators.required,
@@ -28,18 +28,20 @@ export class UserFormComponent implements CanComponentDeactivate {
     ]),
     email: new FormControl('', [Validators.required, Validators.email]),
   });
+  isDirty: boolean = false;
 
   addresses: Address[] = [];
 
-  constructor(public userService: UserService) {}
+  constructor(public userService: UserService) {
+    this.userForm.valueChanges.subscribe(() => {
+      this.isDirty = this.userForm.dirty;
+      this.onDirty.emit(this.isDirty);
+    });
+  }
 
-  canDeactivate(): boolean {
-    if (this.userForm.dirty) {
-      return confirm(
-        'You have unsaved changes. Are you sure you want to leave?'
-      );
-    }
-    return true;
+  addressFormDirty(dirty: boolean) {
+    this.isDirty = dirty;
+    this.onDirty.emit(this.isDirty);
   }
 
   registerUser() {

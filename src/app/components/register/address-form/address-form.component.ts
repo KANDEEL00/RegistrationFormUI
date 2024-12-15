@@ -1,10 +1,10 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
-import { Address } from '../../../shared/models/address';
-import { Governate } from '../../../shared/models/governate';
-import { City } from '../../../shared/models/city';
-import { GovernateService } from '../../services/governate.service';
-import { CityService } from '../../services/city.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Address } from '../../../../shared/models/address';
+import { Governate } from '../../../../shared/models/governate';
+import { City } from '../../../../shared/models/city';
+import { GovernateService } from '../../../services/governate.service';
+import { CityService } from '../../../services/city.service';
 
 @Component({
   selector: 'address-form',
@@ -13,6 +13,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class AddressFormComponent implements OnInit {
   @Output() addAddress = new EventEmitter<Address>();
+  @Output() onDirty = new EventEmitter<boolean>();
 
   addressForm = new FormGroup({
     governateID: new FormControl('', [Validators.required]),
@@ -28,7 +29,11 @@ export class AddressFormComponent implements OnInit {
   constructor(
     public governateService: GovernateService,
     public cityService: CityService
-  ) {}
+  ) {
+    this.addressForm.valueChanges.subscribe(() => {
+      this.onDirty.emit(this.addressForm.dirty);
+    });
+  }
 
   ngOnInit(): void {
     this.governateService.getGovernates().subscribe((data) => {
